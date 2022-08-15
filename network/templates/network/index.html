@@ -1,0 +1,223 @@
+{% extends "network/layout.html" %}
+{%load static%}
+
+{% block body %}
+<div id="error-form">
+
+</div>
+
+<div id='post_content' class="">
+    {% for f in all_post%}
+    <div class="main-con container border col-10 bg-info col-md-7 mt-4">
+        <h5 class="">
+            <a id="{{f.user.id}}" class="text-decoration-none text-dark profile_id" href="#">
+                {{f.user |capfirst}}</a>
+        </h5>
+        <div>
+            <div class="d-flex justify-content-center bg-white">
+                <h1>
+                    <blockquote class="m-2 p-2">{{f.post_content | capfirst}}</blockquote>
+                </h1>
+            </div>
+            <div id="">
+                <span id="change_heart">
+                    {% if f.user. %}{%endif%}
+                    <a href="#" id="{{f.id}}" data-liked_type="liked"
+                        class='text-decoration-none liked liked_heart text-white lead'>
+                        &hearts;
+                    </a>
+                </span>
+                <h6> <span class="no_like" data-post_id="{{f.id}}" class="like">{{f.liked_post.count}} </span>likes</h6>
+            </div>
+            <p> <span class="no_comment" data-post_id="{{f.id}}"></span>comment</p>
+
+        </div>
+    </div>
+
+    {%empty%}
+    nothing
+    {%endfor%}
+</div>
+
+{% if user.is_authenticated %}
+
+<div id='add_post' class="main-con container border col-10 bg-info col-md-7 mt-4">
+    <form id="add-post-form">
+        <div class="form-group lead">
+            Post Content
+        </div>
+        <textarea class="form-control" id="post-body" placeholder="Body"></textarea>
+        <div>
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div id='edit_post' class="main-con container border col-10 bg-info col-md-7 mt-4">
+    <form id="edit-post-form">
+        <div class="form-group lead">
+            Post Content (edit)
+        </div>
+        <div id="edit-post-id"></div>
+        <textarea class="form-control" id="edit-post-body" placeholder="Body"></textarea>
+        <div>
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div id="profile_page" class="main-con  view-profile">
+    <h5 class="text-white text-center m-5"> {{user.username | capfirst}} </h5>
+    <div class="wrapper text-center">
+        <div class="left ">
+            <p><span class="text-danger">{{user.followings.count}}</span> followers</p>
+            <ul class="list-unstyled">
+                {%for f in user.followings.all%}
+                {%for u in f.user.all%}
+                <li><a id="{{u.id}}" class="text-decoration-none text-white profile_id" href="#">
+                        {{ u | capfirst}}</a></li>
+                {% endfor %}
+
+                {% empty %}
+                no follow yet.
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="left ">
+            <p><span class="text-danger">{{user.follower.count}}</span> following</p>
+            <ul class="list-unstyled">
+                {%for f in user.follower.all%}
+                {%for u in f.followings.all%}
+                <li><a id="{{u.id}}" class="text-decoration-none text-white profile_id" href="#">
+                        {{ u | capfirst}}</a></li>
+                {% endfor %}
+
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="right">
+            <div class="info">
+                <h3>Information</h3>
+
+                <div class="info_data">
+
+                    <div class="data">
+                        <h4>Email</h4>
+                        <p>{{user.email}}</p>
+                    </div>
+
+                    <div class="data">
+                        <h4>created on</h4>
+                        <p>{{user.date_joined}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info">
+                <h3>Other information</h3>
+
+                <div class="info_data">
+
+                    <div class="data">
+                        <h4>Total Post</h4>
+                        <p><strong>{{user.posts.count}}</strong></p>
+                    </div>
+
+                    <div class="data">
+                        <h4>Last posted on</h4>
+                        <p>{{user.posts.last.pub_date}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<div class="container">
+    <div id="og-user-posts" class="row mt-5">
+        
+
+    </div>
+      
+</div>
+</div>
+
+
+<div id='following-post-content' class="">
+
+</div>
+
+<div id="view_profile" class="">
+    <div class="container">
+        <div class="row mt-5 ">
+            <h5 class="text-white lead text-center  col-2" id="profile_username"> </h5>
+            <button id="" class=" link button-link text-danger follow_id"></button>
+
+        </div>
+    </div>
+    <div class="container">
+    <div class="wrapper">
+        <div class="left ">
+            <p><span id="no_follower" class="text-danger"></span> followers</p>
+            <ul id="profile_follower" class="list-unstyled">
+            </ul>
+        </div>
+        <div class="left ">
+            <p><span id="no_following" class="text-danger"></span> following</p>
+            <ul class="list-unstyled" id="profile_following">
+            </ul>
+        </div>
+        <div class="right">
+            <div class="info">
+                <h3>Information</h3>
+
+                <div class="info_data">
+
+                    <div class="data">
+                        <h4>Email</h4>
+                        <p id="profile_email"></p>
+                    </div>
+
+                    <div class="data">
+                        <h4>Joined on</h4>
+                        <p id="profile_joined"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info">
+                <h3>Other information</h3>
+
+                <div class="info_data">
+
+                    <div class="data">
+                        <h4>Total post</h4>
+                        <p id="total_post"></p>
+                    </div>
+
+                    <div class="data">
+                        <h4 id="">Last seen</h4>
+                        <p><strong id="last_seen"></strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <div id="user-posts" class="row mt-5">
+        
+
+    </div>
+      
+</div>
+
+</div>
+
+{% endif %}
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'network/network.js' %}"></script>
+{% endblock %}

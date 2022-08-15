@@ -1,0 +1,94 @@
+textarea {
+    min-height: 250px;
+}
+
+textarea.commenttext{
+    min-height: 60px;
+}
+
+button.button-link {
+    background: none;
+    border: none;
+}
+button .button-link-profile {
+    margin-top: -20px;
+    padding: 0px;
+}
+
+
+
+
+div.view-profile{
+    min-height: 250px;
+    border: 10px;
+}
+
+.wrapper {
+  
+   
+    
+   
+    display:flex;
+    box-shadow: 0 1px 10px 0 rgb(111, 112, 110);
+}
+
+.wrapper .left{
+    width:20%;
+    background:linear-gradient(to right,#56bebe,#5596cc);
+    padding:30px 25px;
+    
+    text-align: center;
+    color:#fff;
+    
+}
+
+.wrapper .left button {
+    margin-bottom:10px;
+    border-radius:6px;
+    color:black
+}
+
+.wrapper .left h5{
+    margin-bottom: 10px;
+}
+.wrapper .left p{
+    font-size:15px;
+}
+.wrapper .right{
+width: 60%;
+    background:#fff;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    padding:30px 25px;
+}
+
+.wrapper .right .info{
+    margin-bottom:25px;
+}
+
+.wrapper .right .info h3{
+    margin-bottom:15px;
+    padding-bottom:5px;
+    border-bottom:1px solid #e0e0e0;
+    color:#6a91b3;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+.wrapper .right .info_data{
+    display:flex;
+}
+.wrapper .right .info_data .data{
+    width:100%
+}
+
+.wrapper .right .info_data .data h4{
+    color:#353c4e;
+    margin-bottom:5px;
+
+}
+
+.wrapper .right .info_data .data p{
+   
+    margin-bottom:10px;
+    color:#919aa3;
+}

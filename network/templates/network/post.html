@@ -1,0 +1,78 @@
+{% extends "network/layout.html" %}
+{%load static%}
+
+{% block body %}
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
+
+<div>
+
+{% for f in all_post%}
+<div class="main-con container border col-10 bg-info col-md-7 mt-4">
+    <h5 class=""><a class="text-decoration-none text-dark" href="{%url 'network:profile_page' f.user.id%}">
+            1 {{f.user |capfirst}}</a></h5>
+    <div>
+        <div class="d-flex justify-content-center bg-white">
+            <h1>
+                <blockquote class="m-2 p-2">{{f.post_content | capfirst}}</blockquote>
+            </h1>
+        </div>
+        <div>
+            <span id="" class='text-danger likes'> &hearts; </span>
+            <h6>likes</h6>
+            <p>comment</p>
+        </div>
+    </div>
+</div>
+{%empty%}
+nothing
+{%endfor%}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {%for f in user.followings.all%}
+    follower(followings)
+    {%for u in f.user.all%}
+    follower(user) {{ u }}
+    {% endfor %}
+    {%for u in f.followings.all%}
+    followings {{ u }}
+    {% endfor %}
+
+    {% empty %}
+    nothing
+    {% endfor %}
+    <br />
+    {%for f in user.follower.all%}
+    following(follower(user))
+    {%for u in f.user.all%}
+    follower(user) {{ u }}
+    {% endfor %}
+    {%for u in f.followings.all%}
+    followings {{ u }}
+    {% endfor %}
+
+    {% endfor %}
+    {{ user.follower.count }}
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'network/network.js' %}"></script>
+{% endblock %}
